@@ -15,7 +15,7 @@ pnpm install
 
 ## Docs
 
-- [g-express-api](https://github.com/lotosv2010/g-express-api/docs/index.md)
+- [g-express-api](https://github.com/lotosv2010/g-express-api/blob/v1.0/docs/index.md)
 
 ## Quick Start
 

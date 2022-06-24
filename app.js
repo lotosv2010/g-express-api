@@ -2,6 +2,7 @@ const express = require('express');
 const chalk = require('chalk');
 const morgan = require('morgan');
 const cors = require('cors');
+const router = require('./router');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,9 +16,7 @@ app.use(morgan('dev'));
 // 跨域配置
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('hello express');
-});
+app.use('/api', router);
 
 app.listen(PORT, () => {
   const yellowBright = chalk.yellowBright;

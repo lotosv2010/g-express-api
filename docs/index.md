@@ -165,3 +165,19 @@ cd g-express-api
 pnpm init
 pnpm add express
 ```
+
+### 配置中间件
+
+- [中间件](https://expressjs.com/en/resources/middleware.html)
+- express.json()：配置解析请求体数据 application/json
+- express.urlencoded()：配置解析请求体数据 application/x-www-form-urlencoded
+-morgan('dev')：日志配置
+- cors()：跨域配置
+
+### 路由设计
+
+- [案例](https://realworld-docs.netlify.app/docs/specs/backend-specs/endpoints)
+
+### 源码
+
+- [g-express-api](https://github.com/lotosv2010/g-express-api)
