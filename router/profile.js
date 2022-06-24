@@ -1,38 +1,25 @@
 const express = require('express');
+const {
+  getProfile,
+  followUser,
+  unfollowUser
+} = require('../controller/profile');
 
 const router = express.Router();
 
 /**
  * Get Profile
  */
-router.get('/:username', (req, res, next) => {
-  try {
-    res.send(`${req.method} ${req.path}`);
-  } catch (error) {
-    next(error);
-  }
-});
+router.get('/:username', getProfile);
 
 /**
  * Follow user
  */
-router.post('/:username/follow', (req, res, next) => {
-  try {
-    res.send(`${req.method} ${req.path}`);
-  } catch (error) {
-    next(error);
-  }
-});
+router.post('/:username/follow', followUser);
 
 /**
  * Unfollow user
  */
-router.delete('/:username/follow', (req, res, next) => {
-  try {
-    res.send(`${req.method} ${req.path}`);
-  } catch (error) {
-    next(error);
-  }
-});
+router.delete('/:username/follow', unfollowUser);
 
 module.exports = router;

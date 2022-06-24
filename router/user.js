@@ -1,49 +1,31 @@
 const express = require('express');
+const {
+  login,
+  registration,
+  getCurrentUser,
+  updateUser
+} = require('../controller/user');
 
 const router = express.Router();
 
 /**
  * Authentication
  */
-router.post('/users/login', (req, res, next) => {
-  try {
-    res.send(`${req.method} ${req.path}`);
-  } catch (error) {
-    next(error);
-  }
-});
+router.post('/users/login', login);
 
 /**
  * Registration
  */
-router.post('/users', (req, res, next) => {
-  try {
-    res.send(`${req.method} ${req.path}`);
-  } catch (error) {
-    next(error);
-  }
-});
+router.post('/users', registration);
 
 /**
  * Get Current User
  */
-router.get('/user', (req, res, next) => {
-  try {
-    res.send(`${req.method} ${req.path}`);
-  } catch (error) {
-    next(error);
-  }
-});
+router.get('/user', getCurrentUser);
 
 /**
  * Update User
  */
-router.put('/user', (req, res, next) => {
-  try {
-    res.send(`${req.method} ${req.path}`);
-  } catch (error) {
-    next(error);
-  }
-});
+router.put('/user', updateUser);
 
 module.exports = router;

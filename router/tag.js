@@ -1,16 +1,11 @@
 const express = require('express');
+const { getTags } = require('../controller/tag');
 
 const router = express.Router();
 
 /**
  * Get Tags
  */
- router.get('/', (req, res, next) => {
-  try {
-    res.send(`${req.method} ${req.path}`);
-  } catch (error) {
-    next(error);
-  }
-});
+ router.get('/', getTags);
 
 module.exports = router;

@@ -1,126 +1,73 @@
 const express = require('express');
+const {
+  getListArticles,
+  feedArticles,
+  getArticles,
+  createArticles,
+  updateArticles,
+  deleteArticles,
+  addComments,
+  getComments,
+  deleteComments,
+  favoriteArticle,
+  unfavoriteArticle
+} = require('../controller/article');
 
 const router = express.Router();
 
 /**
  * List Articles
  */
-router.get('/', (req, res, next) => {
-  try {
-    res.send(`${req.method} ${req.path}`);
-  } catch (error) {
-    next(error);
-  }
-});
+router.get('/', getListArticles);
 
 /**
  * Feed Articles
  */
-router.get('/feed', (req, res, next) => {
-  try {
-    res.send(`${req.method} ${req.path}`);
-  } catch (error) {
-    next(error);
-  }
-});
+router.get('/feed', feedArticles);
 
 /**
  * Get Article
  */
-router.get('/:slug', (req, res, next) => {
-  try {
-    res.send(`${req.method} ${req.path}`);
-  } catch (error) {
-    next(error);
-  }
-});
+router.get('/:slug', getArticles);
 
 /**
  * Create Article
  */
-router.post('/', (req, res, next) => {
-  try {
-    res.send(`${req.method} ${req.path}`);
-  } catch (error) {
-    next(error);
-  }
-});
+router.post('/', createArticles);
 
 /**
  * Update Article
  */
- router.put('/:slug', (req, res, next) => {
-  try {
-    res.send(`${req.method} ${req.path}`);
-  } catch (error) {
-    next(error);
-  }
-});
+ router.put('/:slug', updateArticles);
 
 /**
  * Delete Article
  */
- router.delete('/:slug', (req, res, next) => {
-  try {
-    res.send(`${req.method} ${req.path}`);
-  } catch (error) {
-    next(error);
-  }
-});
+ router.delete('/:slug', deleteArticles);
 
 /**
  * Add Comments to an Article
  */
- router.post('/:slug/comments', (req, res, next) => {
-  try {
-    res.send(`${req.method} ${req.path}`);
-  } catch (error) {
-    next(error);
-  }
-});
+ router.post('/:slug/comments', addComments);
 
 /**
  * Get Comments from an Article
  */
- router.get('/:slug/comments', (req, res, next) => {
-  try {
-    res.send(`${req.method} ${req.path}`);
-  } catch (error) {
-    next(error);
-  }
-});
+ router.get('/:slug/comments', getComments);
 
 /**
  * Delete Comment
  */
- router.delete('/:slug/comments/:id', (req, res, next) => {
-  try {
-    res.send(`${req.method} ${req.path}`);
-  } catch (error) {
-    next(error);
-  }
-});
+ router.delete('/:slug/comments/:id', deleteComments);
 
 /**
  * Favorite Article
  */
- router.post('/:slug/favorite', (req, res, next) => {
-  try {
-    res.send(`${req.method} ${req.path}`);
-  } catch (error) {
-    next(error);
-  }
-});
+ router.post('/:slug/favorite', favoriteArticle);
 
 /**
  * Unfavorite Article
  */
- router.delete('/:slug/favorite', (req, res, next) => {
-  try {
-    res.send(`${req.method} ${req.path}`);
-  } catch (error) {
-    next(error);
-  }
-});
+ router.delete('/:slug/favorite', unfavoriteArticle);
 
 module.exports = router;
