@@ -1,6 +1,7 @@
 const express = require('express');
 const chalk = require('chalk');
 const morgan = require('morgan');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -9,8 +10,10 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 // 配置解析请求体数据 application/x-www-form-urlencoded
 app.use(express.urlencoded());
-// 日志
-app.use(morgan('tiny'));
+// 日志配置
+app.use(morgan('dev'));
+// 跨域配置
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.send('hello express');
