@@ -6,6 +6,7 @@ const {
   updateUser
 } = require('../controller/user');
 const userValidator = require('../validator/user');
+const auth = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -23,11 +24,11 @@ router.post('/users', userValidator.register, register);
 /**
  * Get Current User
  */
-router.get('/user', getCurrentUser);
+router.get('/user', auth, getCurrentUser);
 
 /**
  * Update User
  */
-router.put('/user', updateUser);
+router.put('/user', auth, updateUser);
 
 module.exports = router;

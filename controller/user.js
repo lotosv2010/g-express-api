@@ -1,9 +1,23 @@
 const { User } = require('../model');
+const jwt = require('../util/jwt');
+const { jwtSecret } = require('../config/config.default');
 
 // Authentication
 exports.login = async (req, res, next) => {
   try {
-    res.send(`${req.method} ${req.path}`);
+    const user = req.user.toJSON();
+    // 生产token
+    const token = await jwt.sign({
+      userId: user._id
+    }, jwtSecret, {
+      expiresIn: '7d'
+    });
+    Reflect.deleteProperty(user, 'password');
+    
+    res.status(200).json({
+      user,
+      token
+    });
   } catch (error) {
     next(error);
   }
@@ -33,7 +47,9 @@ exports.register = async (req, res, next) => {
 // Get Current User
 exports.getCurrentUser = async (req, res, next) => {
   try {
-    res.send(`${req.method} ${req.path}`);
+    res.status(200).json({
+      user: req.user
+    });
   } catch (error) {
     next(error);
   }
@@ -42,7 +58,17 @@ exports.getCurrentUser = async (req, res, next) => {
 // Update User
 exports.updateUser = async (req, res, next) => {
   try {
-    res.send(`${req.method} ${req.path}`);
+    const { _id } = req.user ?? {};
+    if(req?.user) {
+      const ret = await User.updateOne({ _id }, {$set: {
+        ...req.body.user,
+        updatedAt: new Date()
+      }});
+      const user = await User.findById(_id, { __v: 0 });
+      res.status(200).json({
+        user
+      });
+    }
   } catch (error) {
     next(error);
   }
