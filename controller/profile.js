@@ -10,6 +10,7 @@ exports.getProfile = async (req, res, next) => {
 // Follow user
 exports.followUser = async (req, res, next) => {
   try {
+    JSON.parse('test');
     res.send(`${req.method} ${req.path}`);
   } catch (error) {
     next(error);

@@ -183,3 +183,5 @@ pnpm add express
 - [g-express-api](https://github.com/lotosv2010/g-express-api)
 
 ### 提取控制器模块
+
+### 配置统一错误处理中间件
