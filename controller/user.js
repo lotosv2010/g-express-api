@@ -18,7 +18,9 @@ exports.register = async (req, res, next) => {
     // 2.1 基本数据验证
     // 2.2 业务数据验证
     // 3.验证通过，将数据保存到数据库
-    const user = await User.create(req.body.user);
+    let user = await User.create(req.body.user);
+    user = user.toJSON();
+    Reflect.deleteProperty(user, 'password');
     // 4.发送成功响应
     res.status(201).json({
       user

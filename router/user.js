@@ -13,7 +13,7 @@ const router = express.Router();
 /**
  * Authentication
  */
-router.post('/users/login', login);
+router.post('/users/login', userValidator.login, login);
 
 /**
  * Registration
