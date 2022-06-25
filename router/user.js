@@ -1,12 +1,14 @@
 const express = require('express');
 const {
   login,
-  registration,
+  register,
   getCurrentUser,
   updateUser
 } = require('../controller/user');
+const userValidator = require('../validator/user');
 
 const router = express.Router();
+
 
 /**
  * Authentication
@@ -16,7 +18,7 @@ router.post('/users/login', login);
 /**
  * Registration
  */
-router.post('/users', registration);
+router.post('/users', userValidator.register, register);
 
 /**
  * Get Current User

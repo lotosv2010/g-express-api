@@ -184,4 +184,53 @@ pnpm add express
 
 ### 提取控制器模块
 
+```js
+// Authentication
+exports.login = async (req, res, next) => {
+  try {
+    res.send(`${req.method} ${req.path}`);
+  } catch (error) {
+    next(error);
+  }
+}
+const express = require('express');
+const { login } = require('../controller/user');
+
+const router = express.Router();
+```
+
+```js
+/**
+ * Authentication
+ */
+router.post('/users/login', login);
+
+module.exports = router;
+
+```
+
 ### 配置统一错误处理中间件
+
+```js
+const util = require('util');
+
+module.exports = () => {
+  return async (error, req, res, next) => {
+    console.error(error.stack);
+    // error 上的错误信息都在原型上，JSON 只能解析对象本身上的属性，
+    // 所以直接返回就得到空对象即 {}，因此需要 util.format 做转换
+    res.status(500).json({
+      error: util.format(error)
+    });
+  }
+}
+
+```
+
+```js
+const errorHandler = require('./middleware/error-handler');
+
+//! 统一错误处理
+app.use(errorHandler());
+
+```

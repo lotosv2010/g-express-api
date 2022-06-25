@@ -1,3 +1,5 @@
+const { User } = require('../model');
+
 // Authentication
 exports.login = async (req, res, next) => {
   try {
@@ -8,9 +10,19 @@ exports.login = async (req, res, next) => {
 }
 
 // Registration
-exports.registration = async (req, res, next) => {
+exports.register = async (req, res, next) => {
   try {
-    res.send(`${req.method} ${req.path}`);
+    // todo：4 Create
+    // 1.获取请求体数据
+    // 2.数据验证
+    // 2.1 基本数据验证
+    // 2.2 业务数据验证
+    // 3.验证通过，将数据保存到数据库
+    const user = await User.create(req.body.user);
+    // 4.发送成功响应
+    res.status(201).json({
+      user
+    });
   } catch (error) {
     next(error);
   }
