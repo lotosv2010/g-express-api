@@ -40,7 +40,7 @@ router.post('/', auth, articleValidator.createArticle, createArticles);
 /**
  * Update Article
  */
- router.put('/:slug', updateArticles);
+ router.put('/:slug', auth, articleValidator.updateArticle, updateArticles);
 
 /**
  * Delete Article

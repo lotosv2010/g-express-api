@@ -78,7 +78,15 @@ exports.createArticles = async (req, res, next) => {
 // Update Article
 exports.updateArticles = async (req, res, next) => {
   try {
-    res.send(`${req.method} ${req.path}`);
+    const bodyArticle = req.body.article;
+    const article = req.article;
+    article.title = bodyArticle.title ?? article.title;
+    article.body = bodyArticle.body ?? article.body;
+    article.description = bodyArticle.description ?? article.description;
+    await article.save();
+    res.status(200).json({
+      article
+    });
   } catch (error) {
     next(error);
   }
