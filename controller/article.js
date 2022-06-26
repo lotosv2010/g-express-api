@@ -1,9 +1,32 @@
-const { Article } = require('../model');
+const { Article, User } = require('../model');
 
 // List Articles
 exports.getListArticles = async (req, res, next) => {
   try {
-    res.send(`${req.method} ${req.path}`);
+    const { tag, author, favorited, limit = 10, offset = 0} = req.query;
+    const filter = {};
+    if(tag) {
+      filter.tagList = tag
+    }
+    if(author) {
+      const user = await User.findOne({ username: author});
+      filter.author = user?._id;
+    }
+    const articles = await Article.find(filter)
+      .skip(+offset)
+      .limit(+limit)
+      .sort({
+        createAt: -1
+      })
+      .populate('author');
+    const articleCount = await Article.countDocuments(filter);
+    if(!articles) {
+      return res.status(404).end();
+    }
+    res.status(200).json({
+      articles,
+      articleCount
+    });
   } catch (error) {
     next(error);
   }
