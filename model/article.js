@@ -4,10 +4,6 @@ const baseModel = require('./base');
 const Schema = mongoose.Schema;
 const ArticleSchema = new Schema({
   ...baseModel,
-  slug: {
-    type: String,
-    required: true
-  },
   title: {
     type: String,
     required: true
@@ -22,7 +18,11 @@ const ArticleSchema = new Schema({
   },
   tagList: {
     type: Array,
-    required: true
+    default: null
+  },
+  slug: {
+    type: String,
+    default: null
   },
   favorited: {
     type: Boolean,
@@ -33,22 +33,9 @@ const ArticleSchema = new Schema({
     default: 0
   },
   author: {
-    username: {
-      type: String,
-      required: true
-    },
-    bio: {
-      type: String,
-      required: true
-    },
-    image: {
-      type: String,
-      required: true
-    },
-    following: {
-      type: Boolean,
-      default: false
-    },
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   },
 });
 

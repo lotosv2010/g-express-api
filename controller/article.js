@@ -1,3 +1,5 @@
+const { Article } = require('../model');
+
 // List Articles
 exports.getListArticles = async (req, res, next) => {
   try {
@@ -28,7 +30,16 @@ exports.getArticles = async (req, res, next) => {
 // Create Article
 exports.createArticles = async (req, res, next) => {
   try {
-    res.send(`${req.method} ${req.path}`);
+    const article = new Article({
+      ...req.body.article,
+      author: req.user._id
+    })
+    article.populate('author');
+    await article.save();
+
+    res.status(201).json({
+      article
+    });
   } catch (error) {
     next(error);
   }

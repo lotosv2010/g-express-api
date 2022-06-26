@@ -12,6 +12,8 @@ const {
   favoriteArticle,
   unfavoriteArticle
 } = require('../controller/article');
+const articleValidator = require('../validator/article');
+const auth = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -33,7 +35,7 @@ router.get('/:slug', getArticles);
 /**
  * Create Article
  */
-router.post('/', createArticles);
+router.post('/', auth, articleValidator.createArticle, createArticles);
 
 /**
  * Update Article

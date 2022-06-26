@@ -1,5 +1,4 @@
 const { body } = require('express-validator');
-const req = require('express/lib/request');
 const validate = require('../middleware/validate');
 const { User } = require('../model');
 const md5 = require('../util/md5');
