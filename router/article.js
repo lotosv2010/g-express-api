@@ -30,7 +30,7 @@ router.get('/feed', feedArticles);
 /**
  * Get Article
  */
-router.get('/:slug', getArticles);
+router.get('/:slug', articleValidator.getArticle, getArticles);
 
 /**
  * Create Article

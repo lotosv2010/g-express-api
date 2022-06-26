@@ -21,7 +21,14 @@ exports.feedArticles = async (req, res, next) => {
 // Get Article
 exports.getArticles = async (req, res, next) => {
   try {
-    res.send(`${req.method} ${req.path}`);
+    const id = req.params.slug;
+    const article = await Article.findById(id).populate('author');
+    if(!article) {
+      return res.status(404).end();
+    }
+    res.status(200).json({
+      article
+    });
   } catch (error) {
     next(error);
   }
