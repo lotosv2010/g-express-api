@@ -95,7 +95,9 @@ exports.updateArticles = async (req, res, next) => {
 // Delete Article
 exports.deleteArticles = async (req, res, next) => {
   try {
-    res.send(`${req.method} ${req.path}`);
+    const id = req.params.slug;
+    await Article.deleteOne({ _id: id });
+    res.status(204).end();
   } catch (error) {
     next(error);
   }

@@ -45,7 +45,7 @@ router.post('/', auth, articleValidator.createArticle, createArticles);
 /**
  * Delete Article
  */
- router.delete('/:slug', deleteArticles);
+ router.delete('/:slug', auth, articleValidator.deleteArticle, deleteArticles);
 
 /**
  * Add Comments to an Article
